@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div>
+
+<div class="eleven">
+    <h1  style="color: #ce1c51df; font-weight:bolder; ">Update Image</h1>
+  </div>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+  <a href="{% url 'photo_list' %}">Back to Photo List</a>
+</div>
+
+{% endblock content  %}

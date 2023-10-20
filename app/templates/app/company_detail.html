@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <h1>Company Details</h1>
+    <table>
+        <tr>
+            <th>Company Name:</th>
+            <td>{{ company.company }}</td>
+        </tr>
+        <tr>
+            <th>User Baba:</th>
+            <td>{{ company.user_baba.username }}</td>
+        </tr>
+    </table>
+    
+    <a href="{% url 'company_list' %}">Back to Company List</a>
+    {% endblock content %}
+
+
+
+    

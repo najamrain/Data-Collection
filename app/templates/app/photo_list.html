@@ -1,0 +1,24 @@
+{% extends "app/base.html" %}
+{% block content %}
+  <h1>Photo List</h1>
+  <ul>
+    {% for photo in photos %}
+      <li>
+        <a href="{% url 'photo_detail' photo.id %}">
+          {% if photo.image %}
+            <img src="{{ photo.image.url }}" alt="{{ photo.project.project_name }}" width="200">
+          {% else %}
+            <p>No image available</p>
+          {% endif %}
+        </a>
+        <p><strong>Project Name:</strong> {{ photo.project.project_name }}</p>
+      </li>
+    {% empty %}
+      <p>No photos available.</p>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'upload_photo' %}">Add photos</a>
+
+
+{% endblock content %}

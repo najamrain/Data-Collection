@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div style="width: 80%; margin: 10px auto;">
+    <br>
+    
+    <div class="eleven">
+        <h1 class="heading-icon" style="color: #ce1c51df; font-weight:bolder; ">
+            total projects in <span style="font-weight: lighter;">"{{ company.company }}"</span></h1>
+    </div>
+
+    <!-- <ul style=" width: 80%; margin: 10px auto;">
+      {% for project in projects %}
+        <li><a href="{% url 'project_detail' project.id %}">{{ project.project_name }}</a></li>
+      {% empty %}
+        <li class="text-danger">No projects added for <i class="text-success"> {{ company.company}} </i> yet</li>
+      {% endfor %}
+    </ul> -->
+    <!-- <a href="{% url 'company_list' %}">Back to Companies</a><br>
+    <a href="{% url 'create_project' %}">create project</a> -->
+
+
+
+    <div class="list-container">
+        <div class="new-ul-list">
+            {% for project in projects %}
+
+          <li class="li-style"><a href="{% url 'project_detail' project.id %}">{{ project.project_name }}</a></li>
+          {% empty %}
+
+          <li class="li-style"><a href="#">No projects added for <i class="text-success">{{ company.company}}</i> yet</a></li>
+          {% endfor %}
+
+        </div>
+      </div>
+
+      <a href="{% url 'company_list' %}">Back to Companies</a><br>
+      <a href="{% url 'create_project' %}">create project</a>
+  
+</div>
+
+
+{% endblock content %}

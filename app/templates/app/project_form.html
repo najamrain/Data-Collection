@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+<style>
+  select{
+    user-select: none;
+  }
+</style>
+{% block content %}
+<div class="eleven">
+  <h1  style="color: #ce1c51df; font-weight:bolder; ">Create project</h1>
+</div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create project</button>
+  </form>
+  <a href="{% url 'project_list' %}">Back to Project List</a>
+{% endblock %}
+
+
+

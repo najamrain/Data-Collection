@@ -1,0 +1,56 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div>
+    <div class="eleven">
+        <h1 style="color: #ce1c51df; font-weight:bolder; ">Project <span style="font-weight: lighter;">Details</span>
+        </h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" data-label="Project Name:">Project Name:</th>
+                <th scope="col" data-label="Main Contractor:">Main Contractor:</th>
+                <th scope="col" data-label="Plot Area:">Plot Area:</th>
+                <th scope="col" data-label="Built Up Area:">Built-up Area:</th>
+                <th scope="col" data-label="Location:">Location:</th>
+                <th data-label="Delete/Edit:">Delete/Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ project.project_name }}</td>
+                <td>{{ project.main_contractor_name }}</td>
+                <td>{{ project.plot_area }} m<sup>2</sup></td>
+                <td>{{ project.built_up_area }} m<sup>2</sup></td>
+                <td>{{ project.location }}</td>
+                <td class="d-flex">
+                    <a href="{% url 'edit_project' project.id %}" class="m-2"><i class="fa fa-pencil text-success"></i></a>
+                    <a href="{% url 'delete_project' project.id %}" class="m-2"><i class="fa fa-trash text-danger"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 style="text-align: cente;padding-left: 40px; margin: 0;">Project Photos</h2>
+
+    <div class="companies-container">
+        {% for photo in project.photo_set.all %}
+        <div class="logo-name-container">
+            <div class="company-logo">
+                <img src="{{ photo.image.url }}" alt="{{ photo.project.project_name }}">
+            </div>
+            <div class="company-name" style="display: flex; justify-content: center;">
+                <a href="{% url 'edit_photo' photo.id %}"><i class="fa fa-pencil"></i></a>
+                <a href="{% url 'delete_photo' photo.id %}"><i class="fa fa-trash"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    </div>
+   
+
+    <a href="{% url 'upload_photo' %}">Add photos</a>
+
+
+{% endblock %}

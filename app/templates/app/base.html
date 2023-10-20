@@ -1,0 +1,480 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Collection website</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            font-family: "Playfair Display", serif;
+            text-transform: capitalize;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+        a{
+            text-decoration: none;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .nav-link {
+            color: rgb(225, 164, 12) !important;
+        }
+    </style>
+
+    <style>
+        .companies-container-parent {
+            width: 90%;
+            margin: 10px auto;
+            background: #F3F3F3;
+
+        }
+
+        .companies-container {
+            /* width: 80%; */
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(200px, 1fr));
+            grid-auto-columns: repeat(4, minmax(200px, 1fr));
+            /* background: #F3F3F3; */
+            grid-template-rows: auto;
+            grid-auto-rows: auto;
+            padding: 40px;
+            grid-gap: 40px;
+        }
+        @media(max-width:950px){
+            .companies-container-parent {
+            width: 100%;
+            margin: 10px auto;
+
+        }
+        .navbar{
+            width: 100%;
+        }
+
+            .companies-container {
+            grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));;
+        }
+        }
+
+        .logo-name-container {
+            /* background: white; */
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 230px max-content;
+            position: relative;
+        }
+
+        .company-link-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .logo-name-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-name-container .company-logo {
+            width: 100%;
+            height: 100%;
+            /* object-fit: cover; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+
+        }
+
+        .company-name {
+            background: #F3F3F3;
+        }
+
+        .company-name a {
+            display: block;
+            text-align: center;
+            color: #C2957E;
+            font-size: 25px;
+            text-decoration: none;
+
+            padding: 10px 10px 0 10px;
+            /* background: white; */
+        }
+    </style>
+
+    <!-- list style -->
+    <style>
+        .list-container {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .new-ul-list {
+            list-style: none;
+            padding: 10px;
+            background: #f1f1f1;
+            /* text-align: center; */
+            font-size: 25px;
+            text-decoration: none;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+
+        .new-ul-list .li-style {
+            background: #ddd;
+            padding: 10px;
+            margin: 5px 0;
+            transition: .3s ease-in-out;
+        }
+
+        .new-ul-list .li-style a {
+            text-decoration: none;
+            color: #C2957E;
+            display: block;
+
+            letter-spacing: 5px;
+            font-weight: 600;
+            transition: .3s ease-in-out;
+        }
+
+        .new-ul-list .li-style:hover {
+            background: rgb(94, 101, 82);
+            transition: .3s ease;
+        }
+
+        .new-ul-list .li-style:hover a {
+            color: #fff;
+            transition: .3s ease;
+            letter-spacing: 0;
+        }
+    </style>
+    <!-- list style -->
+    <style>
+        /***table***/
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            padding: 0 15px !important;
+        }
+
+        table td:nth-child(3) {
+            /* font-family: Arial, sans-serif; */
+
+        }
+
+        table td:nth-child(4) {
+            /* font-family: Arial, sans-serif; */
+
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #a7aaaf;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #d4ebe4c9;
+        }
+
+        tr:nth-child(even) {
+            /* background-color: #f2f2f2; */
+        }
+
+        @media (max-width: 600px) {
+
+            table,
+            thead,
+            tbody,
+            tr,
+            th,
+            td {
+                display: block;
+            }
+
+            table {
+                width: 100%;
+                border: none;
+                padding: 0 !important;
+            }
+
+            thead {
+                position: absolute;
+                clip: rect(1px, 1px, 1px, 1px);
+            }
+
+            tr {
+                margin-bottom: 15px;
+            }
+
+            td {
+                /* Add some spacing and a label for better mobile presentation */
+                margin: 0;
+                padding: 5px 2px;
+                position: relative;
+                /* text-align: right; */
+                display: flex;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-right: 15px;
+            }
+        }
+
+        /***table***/
+        /***table**/
+    </style>
+
+    <style>
+        .eleven h1 {
+            position: relative;
+            font-size: 35px;
+            text-align: center;
+            line-height: 1.5em;
+            padding-bottom: 45px;
+            text-transform: capitalize;
+            letter-spacing: 2px;
+            color: #111;
+        }
+
+
+        .eleven h1:before {
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+            width: 60%;
+            left: 50%;
+            margin-left: -30%;
+            height: 1px;
+            content: "";
+            background-color: #777;
+            z-index: 4;
+        }
+
+        .eleven h1:after {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            left: 50%;
+            margin-left: -20px;
+            bottom: 0px;
+            content: '\00a7';
+            font-size: 35px;
+            line-height: 40px;
+            color: #c50000db;
+            /* font-weight: 400; */
+            z-index: 5;
+            display: block;
+            background-color: #F3F3F3;
+        }
+
+        .eleven .heading-icon:after {
+            /* background-color:#ffffff !important; */
+
+
+        }
+
+        /* form design */
+
+        /* form design */
+        /*  */
+    </style>
+    <style>
+        form {
+            width: 50%;
+            margin: 0 auto;
+            /* display: flex;
+            flex-direction: column; */
+           
+
+        }
+
+        @media(max-width:950px){
+            form{
+                width: 95%;
+            }
+        }
+
+        form p {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        form label {
+            display: none;
+        }
+
+
+        input::placeholder {
+ 
+  color: rgba(104, 102, 102, 0.618);
+}
+
+        form input {
+            /* width: 50%; */
+            /* height: 30px; */
+            border: none;
+            padding: 15px 10px;
+            background-color: #ffffffc4;
+            color: gray;
+            outline: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: .5s;
+            border-radius: 5px;
+        }
+
+        form select {
+            /* width: 50%; */
+            /* height: 45px; */
+            border: none;
+            padding: 20px 10px;
+            background-color: #ffffffc4;
+            color: gray;
+            outline: none;
+            font-size: 15px;
+            margin-bottom: 10px;
+            transition: .5s;
+            border-radius: 5px;
+        }
+
+        form button {
+            width: 50%;
+            height: 45px;
+            border: none;
+            color: #FFFFFF;
+            background:#c50000db;
+            border-radius: 5px;
+            font-size: 17px;
+            font-weight: 500;
+            transition: 0.3s;
+            margin: 0 auto;
+        }
+
+        form button:hover {
+            background-color: #31283B;
+        }
+    </style>
+     <style>
+        .navbar{
+            width: 90%;
+            margin: 2px auto;
+            background:#F3F3F3;
+            display: flex;
+            box-shadow: 0 0 2px rgba(0,0,0,0.2);
+
+        }
+        .navbar div{
+            /* margin: 0 5px; */
+            padding: 10px;
+        }
+        .navbar div a{
+            font-size: 20px;
+            font-weight:lighter;
+            color: #1b1215df;
+            font-family: math;
+
+        }
+        .navbar div:nth-child(1){
+            font-size: 20px;
+            background: #c2957e26;
+        }
+        @media(max-width:950px){
+        .navbar{
+            width: 100%;
+        }
+        }
+
+    </style>
+</head>
+
+<body>
+   
+
+    <div class="navbar">
+        <div style="display: flex;align-items: center;">
+            <img src="https://ppqq.netlify.app/banner_images/ninova.png" style="width: 25px;">
+            <a href="/">Ninova Data collection</a>
+        </div>
+        <!-- <div>
+            <a href="">Hello, Rahul</a>
+        </div>
+        <div>
+            <a href="">Log Out</a>
+        </div> -->
+
+    </div>
+
+
+
+
+
+    <div class="companies-container-parent">
+
+        {% block content %}
+
+
+        <div class="eleven">
+            <h1 style="color: #ce1c51df; font-weight:bolder; ">Companies <span style="font-weight: lighter;">List</span>
+            </h1>
+        </div>
+        <div class="companies-container">
+            {% for company in companies %}
+
+            <div class="logo-name-container">
+                <div class="company-logo">
+                    <img src="{{ company.logo.url }}">
+                </div>
+                <div class="company-name">
+                    <a href="{% url 'projects_by_company' company.id %}">
+                        {{ company.company }} </a>
+                </div>
+                <a href="{% url 'projects_by_company' company.id %}" class="company-link-overlay"></a>
+            </div>
+            {% endfor %}
+
+
+
+        </div>
+    </div>
+    {% endblock %}
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+</body>
+
+</html>
