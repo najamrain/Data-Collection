@@ -2,8 +2,10 @@
 {% block content %}
 
 <div>
-
+<div style="width: 80%;margin: 2px auto;">
     <h1>Photo Details</h1>
+
+</div>
     <img src="{{ photo.image.url }}" alt="{{ photo.project.project_name }}" width="300">
 
     <h2>Project: {{ photo.project.project_name }}</h2>
@@ -11,8 +13,10 @@
     <p>Plot Area: {{ photo.project.plot_area }} sq. units</p>
     <p>Built-Up Area: {{ photo.project.built_up_area }} sq. units</p>
     <p>Location: {{ photo.project.location }}</p>
+    <div style="display: flex;justify-content:center;">
 
-    <a href="{% url 'photo_list' %}">Back to Photo List</a>
+    <a class="mybutton" href="{% url 'photo_list' %}">Back to Photo List</a>
+</div>
 </div>
 
 

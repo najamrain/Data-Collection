@@ -4,7 +4,8 @@
 <h1>Companies</h1>
 <ul>
   {% for project in projects %}
-    <li><a href="{% url 'project_detail' project.id %}">{{ project.project_name }}</a></li>
+  
+    <li><a class="mybutton" href="{% url 'project_detail' project.id %}"> {{ project.project_name }}</a></li>
   {% endfor %}
 </ul>
 

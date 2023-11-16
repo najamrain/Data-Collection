@@ -1,43 +1,32 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-<div style="width: 80%; margin: 10px auto;">
+<div class="p-by-c">
     <br>
     
     <div class="eleven">
         <h1 class="heading-icon" style="color: #ce1c51df; font-weight:bolder; ">
-            total projects in <span style="font-weight: lighter;">"{{ company.company }}"</span></h1>
+            Total projects in <span style="font-weight: lighter; color:#dca559;">{{ company.company }}</span></h1>
     </div>
-
-    <!-- <ul style=" width: 80%; margin: 10px auto;">
-      {% for project in projects %}
-        <li><a href="{% url 'project_detail' project.id %}">{{ project.project_name }}</a></li>
-      {% empty %}
-        <li class="text-danger">No projects added for <i class="text-success"> {{ company.company}} </i> yet</li>
-      {% endfor %}
-    </ul> -->
-    <!-- <a href="{% url 'company_list' %}">Back to Companies</a><br>
-    <a href="{% url 'create_project' %}">create project</a> -->
-
-
 
     <div class="list-container">
         <div class="new-ul-list">
             {% for project in projects %}
 
-          <li class="li-style"><a href="{% url 'project_detail' project.id %}">{{ project.project_name }}</a></li>
+          <li class="li-style"><a href="{% url 'project_detail' project.id %}"> <span style="color:#7d7979">{{ forloop.counter }}. </span> {{ project.project_name }}</a></li>
           {% empty %}
 
-          <li class="li-style"><a href="#">No projects added for <i class="text-success">{{ company.company}}</i> yet</a></li>
+          <li class="li-style"><a href="#">No projects added for <i class="text-success">{{ company.company }}</i> yet</a></li>
           {% endfor %}
 
         </div>
       </div>
+      <div style="display: flex;justify-content:center;">
 
-      <a href="{% url 'company_list' %}">Back to Companies</a><br>
-      <a href="{% url 'create_project' %}">create project</a>
+      <a class="mybutton" href="/"><i class="fa fa-arrow-left"></i>Back to Companies</a>
+      <a class="mybutton" href="{% url 'create_project' company.id %}"> Create Project <i class="fa fa-plus"></i></a>
   
 </div>
-
+</div>
 
 {% endblock content %}

@@ -3,8 +3,7 @@
 {% block content %}
 <div>
     <div class="eleven">
-        <h1 style="color: #ce1c51df; font-weight:bolder; ">Project <span style="font-weight: lighter;">Details</span>
-        </h1>
+        <h1 style="color: #ce1c51df; font-weight: bolder;">Project <span style="font-weight: lighter;">Details</span></h1>
     </div>
     <table class="table">
         <thead>
@@ -31,7 +30,7 @@
             </tr>
         </tbody>
     </table>
-    <h2 style="text-align: cente;padding-left: 40px; margin: 0;">Project Photos</h2>
+    <h2 style="width: 80%; margin: 0 auto;">Project Photos</h2>
 
     <div class="companies-container">
         {% for photo in project.photo_set.all %}
@@ -47,10 +46,9 @@
         {% endfor %}
     </div>
 
+    <div style="width: 80%; margin: 2px auto;">
+        <a class="mybutton" href="{% url 'upload_photo' company_id=project.company.id project_id=project.id %}">Add photos</a>
     </div>
-   
-
-    <a href="{% url 'upload_photo' %}">Add photos</a>
-
+</div>
 
 {% endblock %}

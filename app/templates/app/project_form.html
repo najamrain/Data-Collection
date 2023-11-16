@@ -11,9 +11,13 @@
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Create project</button>
+    <button type="submit">Create project <i class="fa fa-arrow-right"></i></button>
   </form>
-  <a href="{% url 'project_list' %}">Back to Project List</a>
+  <br>
+  <div style="">
+
+  <a class="mybutton" href="/"><i class="fa fa-arrow-left"></i>Back to Homepage</a>
+  </div>
 {% endblock %}
 
 

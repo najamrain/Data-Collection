@@ -7,5 +7,8 @@
     {% csrf_token %}
     <button type="submit">Yes, Delete</button>
   </form>
-  <a href="{% url 'photo_list' %}">Cancel</a>
+  <div style="display: flex;justify-content:center;">
+
+  <a class="mybutton" href="{% url 'photo_list' %}">Cancel</a>
+  </div>
 {% endblock %}

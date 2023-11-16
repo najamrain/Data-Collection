@@ -17,8 +17,10 @@
       <p>No photos available.</p>
     {% endfor %}
   </ul>
+  <div style="display: flex;justify-content:center;">
 
-  <a href="{% url 'upload_photo' %}">Add photos</a>
+  <a class="mybutton" href="{% url 'upload_photo' %}">Add photos</a>
+  </div>
 
 
 {% endblock content %}

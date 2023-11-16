@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Company, Project, Photo
 from .forms import CompanyForm, ProjectForm, PhotoForm
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
+from django.urls import reverse
+from django.urls import reverse_lazy
+
+
 
 
 
@@ -46,7 +52,7 @@ def photo_detail(request, photo_id):
     return render(request, 'app/photo_detail.html', {'photo': photo, 'companies': companies})
 
 
-def projects_by_company(request, company_id):
+def projects_by_company(request,company_id):
     companies = Company.objects.all()
     print(companies)
     company = Company.objects.get(id=company_id)
@@ -54,118 +60,113 @@ def projects_by_company(request, company_id):
     context = {
         'company': company,
         'projects': projects,
-        'companies': companies
+        'companies': companies,
     }
     return render(request, 'app/projects_by_company.html',context)
 
 
-from .forms import ProjectForm
 
-# def create_project(request):
-#     companies = Company.objects.all()
-#     if request.method == 'POST':
-#         form = ProjectForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('project_list') 
-#     else:
-#         form = ProjectForm()
-    
-#     context = {'form': form,'companies':companies }
-#     return render(request, 'app/project_form.html', context)
 
-from django.shortcuts import render, redirect
-from .forms import ProjectForm
 
-def create_project(request):
+def create_project(request, company_id):
     companies = Company.objects.all()
 
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
-            # Prepopulate the company field with the user's company
-            # form.instance.company = request.user.company  # Assuming user has a 'company' attribute
-
+            company = Company.objects.get(pk=company_id)  # Fetch the company based on the company_id
+            form.instance.company = company  # Set the company in the form
             form.save()
-            return redirect('project_list')  # Redirect to the project list or any other desired view
+            return redirect('projects_by_company', company_id=company_id)  # Redirect to company-specific projects
     else:
-        # Create a new project form and prepopulate the company field if the user is logged in
-        if request.user.is_authenticated and hasattr(request.user, 'company'):
-            form = ProjectForm(initial={'company': request.user.company.id})
-        else:
-            form = ProjectForm()
+        # Preselect the company based on the company_id from the URL
+        initial_data = {'company': company_id}
+        form = ProjectForm(initial=initial_data)
 
-    context = {'form': form, 'companies':companies}
+    context = {'form': form, 'companies': companies}
     return render(request, 'app/project_form.html', context)
 
-from .forms import PhotoForm
 
 
-def upload_photo(request):
+
+def upload_photo(request, company_id, project_id):
+    companies = Company.objects.all()
+    project = Project.objects.get(pk=project_id)
+
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
+            # Set the project based on the project_id from the URL
+            form.instance.project = project
             form.save()
-            return redirect('photo_list')  # Redirect to the photo list or any other desired view
+            return redirect('project_detail',project_id=project_id)  # Redirect to project detail
     else:
-        form = PhotoForm()
-    
-    context = {'form': form}
+        # Preselect the company based on the company_id from the URL
+        form = PhotoForm(initial={'project': project_id})
+
+    context = {'form': form, 'companies': companies}
     return render(request, 'app/photo_upload.html', context)
 
-from django.views.generic.edit import UpdateView
-from .models import Project
-from .forms import ProjectForm
+
 
 class ProjectUpdateView(UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = 'app/project_update_form.html'
-    success_url = '/'  # Replace with the URL where you want to redirect after editing a project
+
+    def get_success_url(self):
+        project_id = self.object.id
+        return reverse('project_detail', kwargs={'project_id': project_id})
 
 
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
-from .models import Project, Photo
 
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
-from .models import Project, Photo
+
+
 
 class ProjectDeleteView(DeleteView):
     model = Project
     template_name = 'app/project_confirm_delete.html'
-    success_url = reverse_lazy('project_list')
 
     def get_success_url(self):
+        # Get the company ID associated with the deleted project
+        company_id = self.object.company.id
         project = self.get_object()
-        # Delete associated photos
         photos = Photo.objects.filter(project=project)
+
         for photo in photos:
             photo.image.delete()
         photos.delete()
-        return self.success_url
+
+        # Redirect to the company page after project deletion
+        return reverse_lazy('projects_by_company', kwargs={'company_id': company_id})
+
+        
     
 
-from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
-from .models import Photo
-from .forms import PhotoForm
+
+
+
 
 class PhotoUpdateView(UpdateView):
     model = Photo
     form_class = PhotoForm
     template_name = 'app/photo_update_form.html'
-    success_url = reverse_lazy('photo_list')
+   
+    def get_success_url(self):
+        project_id = self.object.project.id
+        return reverse('project_detail', kwargs={'project_id': project_id})
 
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
-from .models import Photo
+
+
 
 class PhotoDeleteView(DeleteView):
     model = Photo
     template_name = 'app/photo_confirm_delete.html'
-    success_url = reverse_lazy('photo_list')
+
+    def get_success_url(self):
+        project_id = self.object.project.id
+        return reverse('project_detail', kwargs={'project_id': project_id})
+
 
 
 

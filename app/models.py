@@ -27,8 +27,8 @@ class Project(models.Model):
         Company, on_delete=models.CASCADE, null=True)
     project_name = models.CharField(max_length=100)
     main_contractor_name = models.CharField(max_length=100)
-    plot_area = models.DecimalField(max_digits=10, decimal_places=2)
-    built_up_area = models.DecimalField(max_digits=10, decimal_places=2)
+    plot_area = models.DecimalField(max_digits=50, decimal_places=2)
+    built_up_area = models.DecimalField(max_digits=50, decimal_places=2)
     location = models.CharField(max_length=100)
 
     def __str__(self):

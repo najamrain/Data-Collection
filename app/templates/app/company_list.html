@@ -5,7 +5,10 @@
 <h1>Companies</h1>
 <ul>
   {% for company in companies %}
-    <li><a href="{% url 'projects_by_company' company.id %}">{{ company.company }}</a></li>
+  <div style="display: flex;justify-content:center;">
+
+    <li><a class="mybutton" href="{% url 'projects_by_company' company.id %}">{{ company.company }}</a></li>
+  </div>
   {% endfor %}
 
 </ul>

@@ -37,6 +37,30 @@
         .nav-link {
             color: rgb(225, 164, 12) !important;
         }
+        .mybutton{
+            display: inline-block;
+    padding: 10px 15px;
+    font-size: 20px;
+    text-align: center;
+    background: #c2957e;
+    color: rgb(251 245 247);
+    margin: 2px 4px;
+    }
+
+    .mybutton:hover{
+        background: rgb(118, 116, 116);
+        color: #fac5ab;
+    }
+    .fa {
+        margin: 0 5px;
+    }
+
+    .fa-trash{
+        color: red;
+    }
+    .fa-pencil{
+        color: rgb(4, 116, 47);
+    }
     </style>
 
     <style>
@@ -44,6 +68,7 @@
             width: 90%;
             margin: 10px auto;
             background: #F3F3F3;
+            padding:5px;
 
         }
 
@@ -137,10 +162,10 @@
             padding: 10px;
             background: #f1f1f1;
             /* text-align: center; */
-            font-size: 25px;
+            font-size: 18px;
             text-decoration: none;
             margin: 20px 0;
-            text-transform: uppercase;
+            text-transform:capitalize;
         }
 
         .new-ul-list .li-style {
@@ -155,7 +180,7 @@
             color: #C2957E;
             display: block;
 
-            letter-spacing: 5px;
+            /* letter-spacing: 5px; */
             font-weight: 600;
             transition: .3s ease-in-out;
         }
@@ -170,12 +195,17 @@
             transition: .3s ease;
             letter-spacing: 0;
         }
+        @media(max-width:950px){
+            .list-container{
+                max-width: 100% !important;
+            }
+        }
     </style>
     <!-- list style -->
     <style>
         /***table***/
         table {
-            width: 70%;
+            width: 80%;
             border-collapse: collapse;
             margin: 20px auto;
             padding: 0 15px !important;
@@ -256,6 +286,15 @@
             }
         }
 
+        .p-by-c{
+            width: 80%;
+            margin: 10px auto;
+        }
+        @media(max-width:950px){
+            .p-by-c{
+                width: 100% !important;
+            }
+        }
         /***table***/
         /***table**/
     </style>
@@ -263,7 +302,7 @@
     <style>
         .eleven h1 {
             position: relative;
-            font-size: 35px;
+            font-size: 25px;
             text-align: center;
             line-height: 1.5em;
             padding-bottom: 45px;
@@ -348,7 +387,7 @@
         form input {
             /* width: 50%; */
             /* height: 30px; */
-            border: none;
+            border:0.1rem solid #8080803d;
             padding: 15px 10px;
             background-color: #ffffffc4;
             color: gray;
@@ -362,8 +401,9 @@
         form select {
             /* width: 50%; */
             /* height: 45px; */
-            border: none;
-            padding: 20px 10px;
+            border:0.1rem solid #8080803d;
+
+            padding: 15px 10px;
             background-color: #ffffffc4;
             color: gray;
             outline: none;
@@ -371,6 +411,7 @@
             margin-bottom: 10px;
             transition: .5s;
             border-radius: 5px;
+            /* pointer-events: none; */
         }
 
         form button {
@@ -378,8 +419,8 @@
             height: 45px;
             border: none;
             color: #FFFFFF;
-            background:#c50000db;
-            border-radius: 5px;
+            background:#776434;
+            /* border-radius: 5px; */
             font-size: 17px;
             font-weight: 500;
             transition: 0.3s;
@@ -428,8 +469,8 @@
 
     <div class="navbar">
         <div style="display: flex;align-items: center;">
-            <img src="https://ppqq.netlify.app/banner_images/ninova.png" style="width: 25px;">
-            <a href="/">Ninova Data collection</a>
+            <img src="https://test-aac.netlify.app/banner_images/ninova.png" style="width: 25px;">
+            <a href="/">Ninova DataCollection</a>
         </div>
         <!-- <div>
             <a href="">Hello, Rahul</a>

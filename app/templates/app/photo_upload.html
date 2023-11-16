@@ -1,11 +1,19 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-  <h1>Upload Photo</h1>
+<div class="eleven">
+    <h1 style="color: #ce1c51df; font-weight:bolder; ">Upload <span style="font-weight: lighter;">Photo</span>
+    </h1>
+</div>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Upload</button>
   </form>
-  <a href="{% url 'photo_list' %}">Back to Photo List</a>
+  <div style="">
+
+  <a class="mybutton" href="/">Back to Homepage</a>
+  </div>
 {% endblock %}
+
+

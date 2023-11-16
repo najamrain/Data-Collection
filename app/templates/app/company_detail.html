@@ -12,8 +12,10 @@
             <td>{{ company.user_baba.username }}</td>
         </tr>
     </table>
-    
-    <a href="{% url 'company_list' %}">Back to Company List</a>
+    <div style="display: flex;justify-content: center;">
+        <a class="mybutton" href="{% url 'company_list' %}">Back to Company List</a>
+
+    </div>
     {% endblock content %}
 
 
